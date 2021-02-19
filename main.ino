@@ -24,7 +24,8 @@ const int leftButton = 40;
 const int rightButton = 41;
 const int goButton = 42;
 
-//
+//steps between squares
+const int stepsPerSquare
 
 // Set the LCD address to 0x27 for a 16 chars and 2 line display
 LiquidCrystal_I2C lcd(0x27, 20, 4);
@@ -88,22 +89,23 @@ void loop() {
       moveStepsX(1,1,800);
       lcd.setCursor(1,2);
       lcd.print("calibrating X axis");
-    }else{
-      lcd.setCursor(3,2);
-      lcd.print("X limit reached");
-      buzz(100,1);
     }
+    
+    lcd.setCursor(3,2);
+    lcd.print("X limit reached");
+    buzz(100,1);
+    
 
     //moving y axis to home position
     while (readY() != true){
       moveStepsY(1,1,800);
       lcd.setCursor(1,2);
       lcd.print("calibrating Y axis");
-    }else{
-      lcd.setCursor(3,2);
-      lcd.print("Y limit reached");
-      buzz(100,1);
     }
+    lcd.setCursor(3,2);
+    lcd.print("Y limit reached");
+    buzz(100,1);
+    
   }
 
   //X stepper move function
@@ -183,17 +185,17 @@ void loop() {
   //read x limit switch
   bool readX(){
     if (digitalRead(limitX) == 1){
-      return true
+      return true;
     }else if (digitalRead(limitX) == 0){
-      return false
+      return false;
     }
   }
 
   //read y limit switch
   bool readY(){
     if (digitalRead(limitY) == 1){
-      return true
+      return true;
     }else if (digitalRead(limitY) == 0){
-      return false
+      return false;
     }
   }
